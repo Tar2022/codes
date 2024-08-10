@@ -1,0 +1,31 @@
+class Solution {
+public:
+
+void fun(vector<int>& nums,vector<vector<int>>& ans,int i,vector<int> &temp,int n)
+{
+    if(i==n)
+    {
+        ans.push_back(temp);
+        return ;
+    }
+    else
+    {
+        temp.push_back(nums[i]);
+        fun(nums,ans,i+1,temp,n);
+        temp.pop_back();
+        while(i+1<n && nums[i+1]==nums[i])
+        {
+            i++;
+        }
+        fun(nums,ans,i+1,temp,n);
+    }
+}
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> ans;
+        vector<int>temp;
+        int n=nums.size();
+        fun(nums,ans,0,temp,n);
+        return ans;
+    }
+};
