@@ -1,0 +1,45 @@
+class Solution {
+public: 
+int n;
+vector<string>ans;
+bool isvalid(string s)
+{
+    if(s[0]=='0')
+    {
+        return false;
+
+    }
+    int val=stoi(s);
+    return val<=255;
+}
+void fun(string &s,int idx,int part,string curr)
+{
+    if(idx==s.size() && part==4)
+    {
+        ans.push_back(curr.substr(0,curr.length()-1));
+    }
+          if(idx+1<=n)
+    {
+        fun(s,idx+1,part+1,curr+s.substr(idx,1)+".");
+
+    }
+    if(idx+2<=n && isvalid(s.substr(idx,2)))
+    {
+        fun(s,idx+2,part+1,curr+s.substr(idx,2)+".");
+
+    }
+        if(idx+3<=n && isvalid(s.substr(idx,3)))
+    {
+        fun(s,idx+3,part+1,curr+s.substr(idx,3)+".");
+
+    }
+  
+}
+    vector<string> restoreIpAddresses(string s) {
+        n=s.size();
+        string curr;
+        fun(s,0,0,curr);
+        return ans;
+        
+    }
+};
